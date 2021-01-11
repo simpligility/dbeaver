@@ -54,7 +54,6 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
     private static final Log log = Log.getLog(SQLCompletionAnalyzer.class);
 
     private static final String ALL_COLUMNS_PATTERN = "*";
-    private static final String MATCH_ANY_PATTERN = "%";
     public static final int MAX_ATTRIBUTE_VALUE_PROPOSALS = 20;
 
     private final SQLCompletionRequest request;
@@ -1006,9 +1005,9 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
             objectName = wordDetector.removeQuotes(objectName);
         }
         if (request.getContext().isSearchInsideNames()) {
-            return MATCH_ANY_PATTERN + objectName + MATCH_ANY_PATTERN;
+            return SQLConstants.MATCH_ANY_PATTERN + objectName + SQLConstants.MATCH_ANY_PATTERN;
         } else {
-            return objectName + MATCH_ANY_PATTERN;
+            return objectName + SQLConstants.MATCH_ANY_PATTERN;
         }
     }
 

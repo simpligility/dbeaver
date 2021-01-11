@@ -96,7 +96,7 @@ public class SQLSearchUtils
                             executionContext,
                             sc,
                             structureAssistant.getAutoCompleteObjectTypes(),
-                            identifierDetector.removeQuotes(objectNameMask),
+                            expandSearchPatternName(identifierDetector, objectNameMask),
                             identifierDetector.isQuoted(objectNameMask),
                             false, 2);
                         if (!tables.isEmpty()) {
@@ -112,5 +112,9 @@ public class SQLSearchUtils
             log.error(e);
             return null;
         }
+    }
+
+    private static String expandSearchPatternName(SQLIdentifierDetector identifierDetector, String nameMask) {
+        return SQLConstants.MATCH_ANY_PATTERN + identifierDetector.removeQuotes(nameMask) + SQLConstants.MATCH_ANY_PATTERN;
     }
 }
